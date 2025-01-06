@@ -177,7 +177,7 @@
         </div>
     </div>
     <script>
-        const apiKey = '6c2f0813f86a4934a25cca3260bebc65'; 
+        const apiKey = process.env.API_KEY; 
         const ingredientInput = document.getElementById('ingredientInput');
         const ingredientList = document.getElementById('ingredientList');
         const recipeList = document.getElementById('recipeList');
@@ -238,7 +238,7 @@
                 return;
             }
 
-            fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${ingredientQuery}&number=10&apiKey=${apiKey}`)
+            fetch(`/api/recipes?ingredients=${ingredientQuery}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`API Error: ${response.statusText}`);
@@ -276,7 +276,7 @@
         }
 
         function fetchRecipeDetails(recipeId) {
-            fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`)
+            fetch(`/api/recipes?recipeId=${recipeId}`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`API Error: ${response.statusText}`);
